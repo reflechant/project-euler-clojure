@@ -6,4 +6,3 @@
 
 (defn -main []
     (println (reduce + (filter even? (take-while (partial > 4000000) (fibonacci))))))
-        
