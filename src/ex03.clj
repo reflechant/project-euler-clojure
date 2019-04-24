@@ -1,15 +1,14 @@
 (ns ex03)
 
 (defn next-prime
-  ([xs] (next-prime xs (inc (last xs))))
+  ([xs] (next-prime xs (inc (first xs))))
   ([xs x]
    (if (some #(zero? (rem x %)) xs)
-     (next-prime xs (inc x))
+     (recur xs (inc x))
      x)))
 
-(defn primes
-  ([] (primes [2]))
-  ([xs]
-   (lazy-seq (conj xs (next-prime xs)))))
+(defn primes []
+   (map first (iterate (fn [xs] (cons (next-prime xs) xs)) '(2))))
 
-(println (take 10 (primes)))
+(defn main []
+  (println (take 100 (primes))))
