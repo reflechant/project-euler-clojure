@@ -1,7 +1,7 @@
-(ns ex01)
+(ns project-euler.ex01)
 
-(defn -main []
-    (println (reduce + (filter
-                        #(or (zero? (rem % 3))
-                             (zero? (rem % 5)))
-                        (range 1000)))))
+(->> (range 1000)
+     (filter #(or (zero? (rem % 3))
+                  (zero? (rem % 5))))
+     (reduce +)
+     (println))

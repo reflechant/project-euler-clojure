@@ -1,22 +1,13 @@
-(ns ex03)
+(ns project-euler.ex03)
 
-(def N 600851475143)
+(defn largest-factor [x]
+  (loop [candidate 2
+         factor    1
+         x         x]
+    (if (= x 1)
+      factor
+      (if (zero? (rem x candidate))
+        (recur candidate candidate (quot x candidate))
+        (recur (inc candidate) factor x)))))
 
-(defn next-prime
-  ([xs] (next-prime xs (inc (first xs))))
-  ([xs x] (if (some #(zero? (rem x %)) xs)
-            (recur xs (inc x))
-            x)))
-
-(defn primes []
-  (map first (iterate
-               (fn [xs] (cons (next-prime xs) xs))
-               '(2))))
-
-(defn factors [x]
-  (filter
-    #(zero? (rem x %))
-    (take-while (< x) (primes))))
-
-(defn -main []
-  (println (factors 10)))
+(println (largest-factor 600851475143))

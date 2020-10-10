@@ -1,8 +1,11 @@
-(ns ex02)
+(ns project-euler.ex02)
 
 (defn fibonacci
-    ([] (fibonacci 1 2))
-    ([a b] (lazy-seq (cons a (fibonacci b (+ a b))))))
+  ([] (fibonacci 1 2))
+  ([x y] (lazy-seq (cons x (fibonacci y (+ x y))))))
 
-(defn -main []
-    (println (reduce + (filter even? (take-while (partial > 4000000) (fibonacci))))))
+(->> (fibonacci)
+     (take-while #(<= % 4000000))
+     (filter even?)
+     (reduce +)
+     (println))
